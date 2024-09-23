@@ -41,17 +41,123 @@
     assign media_width = 0.45
   endif
 -%}
-
+<!-- i have added or gallery_layout == 'thumbnail_slider' to check when and why the arrows dont function properly -->
 <media-gallery
   id="MediaGallery-{{ section.id }}"
   role="region"
-  {% if section.settings.enable_sticky_info %}
-    class="product__column-sticky"
-  {% endif %}
+  class=" {% if section.settings.enable_sticky_info %}product__column-sticky  {% endif %}{% if section.settings.gallery_layout == 'vertical_slider' or section.settings.gallery_layout == 'thumbnail_slider' %} product__vertical-sticky {% endif %}"
+
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
+  <!-- Vertical Thumbnails -->
+  <slider-component
+    id="VerticalGalleryThumbnails-{{ section.id }}"
+    class="custom-vertical-thumbnail-slider"
+  >
+    <!-- Scroll up button -->
+    <button
+      type="button"
+      class="slider-button slider-button--prev custom-vertical-slider-button"
+      id="custom-slider-button--prev"
+      name="previous"
+      aria-label="{{ 'general.slider.previous_slide' | t }}"
+      aria-controls="VerticalGalleryThumbnails-{{ section.id }}"
+    >
+      <span class="svg-wrapper">
+        {{ 'icon-caret-up.svg' | inline_asset_content }}
+      </span>
+    </button>
+
+    <!-- Thumbnails list -->
+    <ul
+      id="VerticalThumbnailList-{{ section.id }}"
+      class="custom-vertical-thumbnail-list"
+    >
+      {%- if featured_media != null -%}
+        {%- liquid
+          capture media_index
+            if featured_media.media_type == 'model'
+              increment model_index
+            elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video'
+              increment video_index
+            elsif featured_media.media_type == 'image'
+              increment image_index
+            endif
+          endcapture
+          assign media_index = media_index | plus: 1
+        -%}
+        <li
+          id="Thumbnail-{{ section.id }}-0"
+          class="thumbnail-list__item slider__slide"
+          data-target="Media-{{ section.id }}-{{ featured_media.id }}"
+          data-media-position="{{ media_index }}"
+        >
+          <button
+            class="thumbnail"
+            aria-label="{%- if featured_media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif featured_media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
+            aria-current="true"
+            aria-controls="GalleryViewer-{{ section.id }}"
+          >
+            {{
+              featured_media.preview_image
+              | image_url: width: 416
+              | image_tag: loading: 'lazy', alt: featured_media.alt
+              | escape
+            }}
+          </button>
+        </li>
+      {%- endif -%}
+
+      {%- for media in product.media -%}
+        {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+          {%- liquid
+            capture media_index
+              if media.media_type == 'model'
+                increment model_index
+              elsif media.media_type == 'video' or media.media_type == 'external_video'
+                increment video_index
+              elsif media.media_type == 'image'
+                increment image_index
+              endif
+            endcapture
+            assign media_index = media_index | plus: 1
+          -%}
+          <li
+            id="Thumbnail-{{ section.id }}-{{ forloop.index }}"
+            class="thumbnail-list__item slider__slide"
+            data-target="Media-{{ section.id }}-{{ media.id }}"
+            data-media-position="{{ media_index }}"
+            style="margin-bottom: 1rem;"
+          >
+            <button
+              class="thumbnail"
+              aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
+              aria-controls="GalleryViewer-{{ section.id }}"
+            >
+              {{ media.preview_image | image_url: width: 416 | image_tag: loading: 'lazy', alt: media.alt | escape }}
+            </button>
+          </li>
+        {%- endunless -%}
+      {%- endfor -%}
+    </ul>
+
+    <!-- Scroll down button -->
+    <button
+      type="button"
+      class="slider-button slider-button--next custom-vertical-slider-button"
+      name="next"
+      aria-label="{{ 'general.slider.next_slide' | t }}"
+      aria-controls="VerticalGalleryThumbnails-{{ section.id }}"
+      id="custom-slider-button--next"
+    >
+      <span class="svg-wrapper">
+        {{ 'icon-caret-down.svg' | inline_asset_content }}
+      </span>
+    </button>
+  </slider-component>
+  <!-- end Vertical Thumbnails -->
   <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
     <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
       {{ 'accessibility.skip_to_product_info' | t }}

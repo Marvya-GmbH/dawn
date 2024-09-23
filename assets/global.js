@@ -1267,3 +1267,28 @@ class BulkAdd extends HTMLElement {
 if (!customElements.get('bulk-add')) {
   customElements.define('bulk-add', BulkAdd);
 }
+//code related to the sticky product bar
+$(window).scroll(function () {
+  let scrollTop = $(window).scrollTop();
+  let windowWidth = $(window).width();
+
+  // Check for desktop view
+  if (windowWidth > 1024) {
+    // Show sticky bar after scrolling 500px
+    if (scrollTop >= 500) {
+      $('.sticky-bar').css('display', 'flex');
+    } else {
+      $('.sticky-bar').css('display', 'none');
+    }
+  }
+
+  // Check for mobile/tablet view
+  if (windowWidth <= 1024) {
+    // Show sticky bar after scrolling 900px
+    if (scrollTop >= 900) {
+      $('.sticky-bar').css('display', 'flex');
+    } else {
+      $('.sticky-bar').css('display', 'none');
+    }
+  }
+});

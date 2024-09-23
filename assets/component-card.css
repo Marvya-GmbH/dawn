@@ -12,8 +12,12 @@
 
 .card:not(.ratio) {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100%;
+  padding: 24px 0px;
+  align-items: flex-start;
+ gap: 24px;
+ flex: 1 0 0;
 }
 
 .card.card--horizontal {

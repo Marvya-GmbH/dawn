@@ -104,8 +104,25 @@
           </span>
         {%- endunless -%}
         <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
-        <span class="price-item price-item--sale price-item--last">
+        <span class="custom-sale-price price-item price-item--sale price-item--last">
           {{ money_price }}
+          {%- if show_badges -%}
+            {%- if price < product.compare_at_price -%}
+              {%- assign discount_percentage = product.compare_at_price
+                | minus: price
+                | times: 100.0
+                | divided_by: product.compare_at_price
+                | round
+                | append: '%'
+              -%}
+              <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}"
+                >-{{ discount_percentage -}}
+              </span>
+            {%- endif -%}
+            <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
+              {{ 'products.product.sold_out' | t }}
+            </span>
+          {%- endif -%}
         </span>
       </div>
       <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
@@ -124,13 +141,11 @@
       </small>
     </div>
     {%- if show_badges -%}
-      <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
-        {{ 'products.product.on_sale' | t }}
-      </span>
-
-      <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
-        {{ 'products.product.sold_out' | t }}
-      </span>
+      {%- if product.metafields.custom.shipping_cost.value != blank -%}
+        <p class="custom-shipping-cost">
+          {{ product.metafields.custom.shipping_cost.value }}€ {{ 'products.product.custom-shipping-cost' | t }}
+        </p>
+      {%- endif -%}
     {%- endif -%}
   </div>
 {% endunless %}

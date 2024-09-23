@@ -18,6 +18,7 @@ if (!customElements.get('media-gallery')) {
             .querySelector('button')
             .addEventListener('click', this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false));
         });
+
         if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) this.removeListSemantic();
       }
 
@@ -45,7 +46,8 @@ if (!customElements.get('media-gallery')) {
 
           if (this.elements.thumbnails) {
             const activeThumbnail = this.elements.thumbnails.querySelector(`[data-target="${mediaId}"]`);
-            activeThumbnail.parentElement.firstChild !== activeThumbnail && activeThumbnail.parentElement.prepend(activeThumbnail);
+            activeThumbnail.parentElement.firstChild !== activeThumbnail &&
+              activeThumbnail.parentElement.prepend(activeThumbnail);
           }
 
           if (this.elements.viewer.slider) this.elements.viewer.resetPages();
@@ -115,3 +117,49 @@ if (!customElements.get('media-gallery')) {
     }
   );
 }
+//******Code for vertical carrousel *******
+document.addEventListener('DOMContentLoaded', function () {
+  //When added in media-gallery.js ,section.id is only accessible under product-media-gallery.liquid which is not a best practise to add there
+  const thumbnailSlider = document.querySelector('#VerticalThumbnailList-{{ section.id }}');
+  const galleryViewer = document.querySelector('#Slider-Gallery-{{ section.id }}');
+  const thumbnails = thumbnailSlider.querySelectorAll('.thumbnail-list__item');
+
+  // here is my concern update the main gallery based on the selected thumbnail
+  function updateGallery(targetMediaId) {
+    const targetSlide = galleryViewer.querySelector(`[data-media-id="${targetMediaId}"]`);
+    if (targetSlide) {
+      // remove 'is-active' class from all slides
+      galleryViewer.querySelectorAll('.slider__slide').forEach((slide) => {
+        slide.classList.remove('is-active');
+      });
+      // add 'is-active' class to the target slide
+      targetSlide.classList.add('is-active');
+    } else {
+      console.error('Target slide not found!');
+    }
+  }
+  thumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener('click', function () {
+      const targetMediaId = this.dataset.target;
+      updateGallery(targetMediaId);
+    });
+  });
+  // Arrow button functionality
+  const prevButton = document.querySelector('#custom-slider-button--prev');
+  const nextButton = document.querySelector('#custom-slider-button--next');
+  prevButton.addEventListener('click', function () {
+    const activeSlide = galleryViewer.querySelector('.slider__slide.is-active');
+    const prevSlide = activeSlide.previousElementSibling;
+    if (prevSlide) {
+      updateGallery(prevSlide.dataset.mediaId);
+    }
+  });
+
+  nextButton.addEventListener('click', function () {
+    const activeSlide = galleryViewer.querySelector('.slider__slide.is-active');
+    const nextSlide = activeSlide.nextElementSibling;
+    if (nextSlide) {
+      updateGallery(nextSlide.dataset.mediaId);
+    }
+  });
+});

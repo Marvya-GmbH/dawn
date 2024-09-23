@@ -146,7 +146,7 @@
       <div class="card__content">
         <div class="card__information">
           <h3
-            class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
+            class="custom-card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
             {% if card_product.featured_media or settings.card_style == 'card' %}
               id="title-{{ section_id }}-{{ card_product.id }}"
             {% endif %}
@@ -285,6 +285,11 @@
                 </div>
                 </quantity-popover>
               {% endif %}
+            {%- endif -%}
+            {%- if product.metafields.custom.shipping_cost.value != blank -%}
+              <p class="custom-shipping-cost">
+                {{ product.metafields.custom.shipping_cost.value }}€ {{ 'products.product.custom-shipping-cost' | t }}
+              </p>
             {%- endif -%}
           </div>
         </div>
