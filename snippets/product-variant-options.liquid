@@ -91,7 +91,12 @@
       {% endif %}
       {{ input_dataset }}
     >
-    <label for="{{ input_id }}">
+    <label
+      for="{{ input_id }}"
+      {% if option_disabled %}
+        class="price--line-through"
+      {% endif %}
+    >
       {{ value -}}
       {{ label_unavailable }}
     </label>

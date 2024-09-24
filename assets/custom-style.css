@@ -41,15 +41,16 @@ font-size: 1.2rem;
 }
 .custom-energie-label{
   display: flex;
-  padding: 24px 0px var(--font-size-xsmall-text, 12px) 0px;
+  padding: 0;
   align-items: flex-end;
   align-self: stretch;
   flex-direction: column;
 }
-@media screen and (min-width: 750px) {
+@media screen and (max-width: 749px) {
   .custom-energie-label {
-    padding:0;
-
+    align-items: flex-start;
+    padding: 20px 0px var(--font-size-xsmall-text, 12px) 0px;
+   
   }
 }
 .energy-label{
@@ -57,6 +58,12 @@ font-size: 1.2rem;
   width: 56px;
   justify-content: flex-end;
   align-items: flex-start;
+}
+@media screen and (max-width: 749px) {
+.energy-label{
+-webkit-transform: scaleX(-1);
+transform: scaleX(-1);
+}
 }
 .energy-label-text{
     color: var(--primary-Near-Black, #0A1119);
@@ -276,3 +283,77 @@ scrollbar-width: none;
     font-weight: 400;
     line-height: var(--font-size-copy-large, 20px);
 }
+
+/* Slider for mobile */
+.custom-slider-container {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  position: relative;
+}
+
+.custom-slider-track {
+  display: flex;
+  transition: scroll-left 0.3s ease-in-out;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding:0;
+}
+.custom-slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-slider-scrollbar-container {
+  width: 100%;
+  margin-top: 10px;
+  position: relative;
+}
+
+#customSliderScrollbar {
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+input#customSliderScrollbar::-webkit-slider-thumb {
+  visibility: hidden;
+}
+input#customSliderScrollbar::-webkit-scrollbar{
+  height: 4px; 
+  border-radius: 4px; 
+  background: var(--greyscale-Light-Grey, #C0BEBE); 
+  outline: none; 
+}
+/* for the track to disable the default style */
+input#customSliderScrollbar {
+  -webkit-appearance: none; 
+  appearance: none;
+  height: 4px; 
+  border-radius: 4px; 
+  background: var(--greyscale-Off-grey, #F4F1EF);
+  outline: none; 
+  position: relative;
+}
+
+input#customSliderScrollbar::-webkit-slider-runnable-track {
+  height: 4px; 
+  border-radius: 4px; 
+ background: var(--greyscale-Off-grey, #F4F1EF);
+}
+
+input#customSliderScrollbar::before {
+  content: '';
+  position: absolute;
+  height: 4px; 
+  border-radius: 4px;
+  background: var(--greyscale-Light-Grey, #C0BEBE);
+
+  width: calc(var(--value, 0%) * 0.78); 
+  left: 0; 
+  transition: width 0.1s;
+}
+/* end Slider for mobile */

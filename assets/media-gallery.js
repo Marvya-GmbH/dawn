@@ -163,3 +163,48 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+class CustomSlider {
+  constructor() {
+    this.slider = document.querySelector('.custom-slider-track');
+    this.sliderScrollbar = document.getElementById('customSliderScrollbar');
+    this.totalScrollWidth = this.slider.scrollWidth - this.slider.clientWidth;
+
+    this.sliderScrollbar.addEventListener('input', (e) => this.onScrollbarInput(e));
+    this.slider.addEventListener('scroll', () => this.updateScrollbarPosition());
+
+    this.updateFill();
+  }
+
+  onScrollbarInput(event) {
+    const value = parseInt(event.target.value, 10);
+    const maxScroll = this.slider.scrollWidth - this.slider.clientWidth;
+
+    // position is initially not empty first image on value 30 to 130
+    const scrollPos = ((value - 30) / 100) * maxScroll;
+    this.slider.scrollTo({
+      left: scrollPos,
+      behavior: 'smooth',
+    });
+
+    this.updateFill();
+  }
+
+  // fill slider on manual scroll
+  updateScrollbarPosition() {
+    const maxScroll = this.slider.scrollWidth - this.slider.clientWidth;
+    const scrollPercentage = (this.slider.scrollLeft / maxScroll) * 100 + 30;
+    this.sliderScrollbar.value = scrollPercentage.toFixed(0);
+    this.updateFill();
+  }
+
+  updateFill() {
+    const value = this.sliderScrollbar.value;
+    this.sliderScrollbar.style.setProperty('--value', value + '%'); // css scroll filled variable is updated
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const sliderScrollbar = document.getElementById('customSliderScrollbar');
+  sliderScrollbar.value = 30; // initial position is 30 because we have an item
+  new CustomSlider();
+});

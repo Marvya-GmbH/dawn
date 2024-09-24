@@ -93,8 +93,9 @@ variant-selects {
 }
 
 .product-form__input--pill input[type='radio']:checked + label {
-  background-color: rgb(var(--color-foreground));
-  color: rgb(var(--color-background));
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  border: 2px solid var(--primary-Near-Black, #0A1119);
 }
 
 @media screen and (forced-colors: active) {
@@ -117,6 +118,7 @@ variant-selects {
   border-color: rgba(var(--color-foreground), 0.1);
   color: rgba(var(--color-foreground), 0.6);
   text-decoration: line-through;
+  border: 1px dashed var(--greyscale-Light-Grey, #C0BEBE);
 }
 
 .product-form__input--pill input[type='radio'].disabled:checked + label,
