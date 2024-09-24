@@ -41,7 +41,7 @@ font-size: 1.2rem;
 }
 .custom-energie-label{
   display: flex;
-  padding: 48px 0px var(--font-size-xsmall-text, 12px) 0px;
+  padding: 24px 0px var(--font-size-xsmall-text, 12px) 0px;
   align-items: flex-end;
   align-self: stretch;
   flex-direction: column;
@@ -84,6 +84,7 @@ color:#DB1420;
 font-weight:800;
 align-items: center !important;
 display: flex !important;
+gap: var(--font-size-xsmall-text);
 }
 .custom-wrapper-buy{
   display: flex;
@@ -155,6 +156,34 @@ vertical-align:middle;
 }
 .force-hide{
 display:none !important;
+}
+@media screen and (min-width: 750px) {
+.small-hide-desktop{
+  display: none !important;
+}}
+@media screen and (max-width: 749px) {
+.small-hide-mobile{
+   display: none !important;
+}
+}
+/*for percentage badge */
+.badge-pourcentage {
+  color: var(--semantic-price, #DB1420);
+  font-family: var(--font-family-copy, Poppins);
+  font-size: var(--font-size-xsmall-text, 12px);
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--line-height-xsmall-text, 20px); /* 166.667% */
+  border: 1px solid transparent;
+  border-radius: var(--badge-corner-radius);
+  display: inline-block;
+  letter-spacing: 0.1rem;
+  padding: 0px 4px 0px 4px;
+  text-align: center;
+  background-color: rgb(var(--color-badge-background));
+  border: 1px solid var(--semantic-price, #DB1420);
+  background: var(--basic-white, #FFF);
+  word-break: break-word;
 }
 /* styling for Vertical slider */
 @media screen and (min-width: 750px) {

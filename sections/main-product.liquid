@@ -79,11 +79,10 @@
         {% render 'product-media-gallery', variant_images: variant_images %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {% comment %} When on sale the badge is displayed on top of the product page{% endcomment %}
         {% assign compare_at_price = product.compare_at_price %}
         {% assign sale_price = product.price %}
         {%- if compare_at_price > sale_price -%}
-          <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
+          <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}  small-hide-mobile">
             {{ 'products.product.on_sale' | t }}
           </span>
         {% endif %}

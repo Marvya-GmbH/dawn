@@ -167,6 +167,13 @@
       class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile"
       role="list"
     >
+      {% assign compare_at_price = product.compare_at_price %}
+      {% assign sale_price = product.price %}
+      {%- if compare_at_price > sale_price -%}
+        <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }} small-hide-desktop">
+          {{ 'products.product.on_sale' | t }}
+        </span>
+      {% endif %}
       {%- if product.selected_or_first_available_variant.featured_media != null -%}
         {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
         <li
