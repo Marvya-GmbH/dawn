@@ -60,7 +60,7 @@
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
 
-        <div class="product-form__buttons">
+        <div class="product-form__buttons  {%- if max_width == true -%}custom-full-width {%- endif -%}">
           {%- liquid
             assign check_against_inventory = true
             if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
@@ -88,7 +88,10 @@
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                 {{ 'products.product.sold_out' | t }}
               {%- else -%}
-                {{ 'products.product.add_to_cart' | t }}
+                <span style="display:flex;gap:8px">
+                  {% if hide_text == false %}{{ 'products.product.add_to_cart' | t }}{% endif %}
+                  {{- 'icon-customcart.svg' | inline_asset_content -}}
+                </span>
               {%- endif -%}
             </span>
             {%- render 'loading-spinner' -%}

@@ -20,7 +20,7 @@
 }
 
 .accordion {
-  margin-top: 2.5rem;
+ /* margin-top: 2.5rem;*/
   margin-bottom: 0;
   border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
@@ -52,6 +52,12 @@
   word-break: break-word;
   overflow-x: auto;
   padding: 0 0.6rem;
+  color: var(--primary-Near-Black, #0A1119);
+font-family: var(--font-family-copy, Poppins);
+font-size: var(--font-size-copy, 16px);
+font-style: normal;
+font-weight: 400;
+line-height: var(--line-height-copy, 30px); /* 187.5% */
 }
 
 .accordion__content img {

@@ -182,17 +182,32 @@
           <img class="sticky-bar-thumb-thumb" src="{{ product.featured_image | img_url }}" width="60" height="60">
         </div>
         <div class="sticky-bar-title">
+          {%- if product.vendor -%}
+            <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+            <div class="Vendor-sticky-caption">{{ product.vendor }}</div>
+          {%- endif -%}
           <span class="sticky-title">{{ product.title }}</span>
+          <div class="custom-product-rating">
+            <img src="{{ 'rating.png' | asset_url }}" alt="Rating Stars" class="rating-stars">(89)
+          </div>
         </div>
       </div>
 
       <div class="sticky-bar-price">
-        {%- render 'price', product: product, placeholder: placeholder, use_variant: true, show_badges: false -%}
+        {%- render 'price',
+          product: product,
+          placeholder: placeholder,
+          use_variant: true,
+          show_badges: false,
+          hide_price: true
+        -%}
         {%- render 'buy-buttons',
           block: block,
           product: product,
           product_form_id: product_form_id,
-          section_id: section.id
+          section_id: section.id,
+          hide_text: false,
+          max_width: true
         -%}
       </div>
     </div>

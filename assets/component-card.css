@@ -46,6 +46,7 @@
 
 .card--card,
 .card--standard .card__inner {
+  width: 100px;
   position: relative;
   box-sizing: border-box;
   border-radius: var(--border-radius);
@@ -95,6 +96,10 @@
 
 .card-information {
   text-align: var(--text-alignment);
+  display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+align-self: stretch;
 }
 
 .card__media,
@@ -270,7 +275,7 @@
 @media screen and (min-width: 750px) {
   .card__information {
     padding-bottom: 1.7rem;
-    padding-top: 1.7rem;
+    padding-top: unset;
   }
 }
 
@@ -466,7 +471,7 @@
 }
 
 .card-information > * + * {
-  margin-top: 0.5rem;
+ /* margin-top: 0.5rem;*/
 }
 
 .card-information {
@@ -499,7 +504,7 @@
 }
 
 .card-information > *:not(.visually-hidden:first-child) + *:not(.rating):not(.card__information-volume-pricing-note) {
-  margin-top: 0.7rem;
+  margin-top: 0.1rem;
 }
 
 .card-information .caption {

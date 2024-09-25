@@ -268,7 +268,7 @@
       </div>
     </slider-component>
   {% elsif section.settings.mobile_slider == 'custom-slider' %}
-    <!-- Custom horizontal scrollbar -->
+    <!-- Custom Mobile horizontal scrollbar -->
     <div class="custom-slider-container">
       <ul class="custom-slider-track">
         {% assign compare_at_price = product.compare_at_price %}
@@ -319,11 +319,10 @@
         {%- endfor -%}
       </ul>
     </div>
-
-    <!-- Mobile custom horizontal scrollbar -->
-    <div class="custom-slider-scrollbar-container">
+    <div class="custom-slider-scrollbar-container small-hide-desktop">
       <input type="range" id="customSliderScrollbar" min="30" max="130" value="30" aria-label="Slider Scrollbar">
     </div>
+    <!-- end Custom Mobile horizontal scrollbar -->
   {% endif %}
   {%- if first_3d_model -%}
     <button
