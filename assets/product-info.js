@@ -13,7 +13,6 @@ if (!customElements.get('product-info')) {
 
       constructor() {
         super();
-
         this.quantityInput = this.querySelector('.quantity__input');
       }
 
@@ -24,9 +23,23 @@ if (!customElements.get('product-info')) {
           PUB_SUB_EVENTS.optionValueSelectionChange,
           this.handleOptionValueChange.bind(this)
         );
-
+        this.updateActiveVariant();
         this.initQuantityHandlers();
         this.dispatchEvent(new CustomEvent('product-info:loaded', { bubbles: true }));
+      }
+
+      // Function to update the .active_variant element with the selected input's value
+      updateActiveVariant() {
+        const fieldset = document.querySelector('.product-form__input--pill');
+        const radios = fieldset.querySelectorAll('input[type="radio"]');
+        radios.forEach((radio) => {
+          if (radio.checked) {
+            const activeVariantElement = document.querySelector('.active_variant');
+            if (activeVariantElement) {
+              activeVariantElement.textContent = radio.value;
+            }
+          }
+        });
       }
 
       addPreProcessCallback(callback) {
@@ -200,6 +213,7 @@ if (!customElements.get('product-info')) {
             html.getElementById(`ProductSubmitButton-${this.sectionId}`)?.hasAttribute('disabled') ?? true,
             window.variantStrings.soldOut
           );
+          this.updateActiveVariant();
 
           publish(PUB_SUB_EVENTS.variantChange, {
             data: {
