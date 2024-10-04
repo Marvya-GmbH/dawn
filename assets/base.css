@@ -3212,7 +3212,7 @@ details-disclosure > details {
   .shopify-payment-button [role='button']:focus {
     outline: solid transparent 1px;
   }
-
+  
   .field__input:focus,
   .select__select:focus,
   .customer .field input:focus,

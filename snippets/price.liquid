@@ -29,6 +29,7 @@
   assign money_price = price | money
   assign money_price_min = price_min | money
   assign money_price_max = price_max | money
+  assign money_without_currency = price | money_without_currency
   if settings.currency_code_enabled
     assign money_price = price | money_with_currency
     assign money_price_min = price_min | money_with_currency
@@ -86,32 +87,55 @@
         {%- else -%}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span class="price-item price-item--regular">
-            {{ money_price }}
+            {{ money_price | replace: '.', ',' | replace: '€', '' | replace: 'EUR', '' | replace: ' ', '' }}€
           </span>
         {%- endif -%}
       </div>
-      <div class="price__sale">
+      <div class="price__sale price-wrapper">
         {%- unless product.price_varies == false and product.compare_at_price_varies %}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span>
             <s class="price-item price-item--regular">
               {% if settings.currency_code_enabled %}
-                {{ compare_at_price | money_with_currency }}
+                {{ compare_at_price | money_without_currency }}€
               {% else %}
                 {{ compare_at_price | money }}
               {% endif %}
             </s>
           </span>
         {%- endunless -%}
+
         <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
+
+        {%- assign compare_at_price_int = compare_at_price | times: 1 -%}
+        {%- assign money_price_int = money_price | remove: '€' | remove: 'EUR' | remove: ',' | strip | times: 1 -%}
+        {%- assign price_with_vat = money_price_int | times: 1.19 -%}
+        {%- assign price_with_vat_display = price_with_vat | divided_by: 100 | replace: '.', ',' -%}
+        {%- assign compare_at = compare_at_price | money_without_currency -%}
+        {%- assign price_diff = compare_at_price_int | minus: money_price_int -%}
+        {%- assign savings_percentage = compare_at
+          | minus: money_without_currency
+          | times: 100
+          | divided_by: compare_at
+          | round
+        -%}
         <span class="price-item price-item--sale price-item--last">
-          {{ money_price }}
+          {{ money_price | replace: '.', ',' | replace: '€', '' | replace: 'EUR', '' | replace: ' ', '' }}€
+          {% if compare_at_price_int > money_price_int %}
+            <span class="savings"> -{{ savings_percentage }}% </span>
+          {% endif %}
         </span>
+
+        <span class="mwst"> {{ price_with_vat_display }}€ inkl. MwSt., zzgl. Versand</span>
       </div>
+
       <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
         <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
         <span class="price-item price-item--last">
-          <span>{{- product.selected_or_first_available_variant.unit_price | money -}}</span>
+          <span>
+            {{- product.selected_or_first_available_variant.unit_price | money_without_currency | replace: '.', ',' -}}
+            €
+          </span>
           <span aria-hidden="true">/</span>
           <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
           <span>
@@ -122,12 +146,9 @@
           </span>
         </span>
       </small>
+      {% render 'productdatenblatt' %}
     </div>
     {%- if show_badges -%}
-      <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
-        {{ 'products.product.on_sale' | t }}
-      </span>
-
       <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
         {{ 'products.product.sold_out' | t }}
       </span>

@@ -89,6 +89,7 @@
                 {{ 'products.product.sold_out' | t }}
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
+                {% render 'icon-cart' %}
               {%- endif -%}
             </span>
             {%- render 'loading-spinner' -%}
