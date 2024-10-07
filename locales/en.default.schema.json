@@ -2267,6 +2267,19 @@
             }
           }
         },
+        "contact":{
+          "name": "Contact",
+          "settings":{
+            "contact":{
+              "label": "Image",
+              "info": "Contact person's photo"
+            },
+            "richtext":{
+              "label": "Contact info",
+              "info": "Add contact information ie. phone number"
+            }
+          }
+        },
         "popup": {
           "name": "Pop-up",
           "settings": {

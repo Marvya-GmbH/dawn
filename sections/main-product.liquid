@@ -658,7 +658,7 @@
     {% for block in section.blocks %}
       {%- case block.type -%}
         {% when 'payment' %}
-        <div class="payment-wrapper">
+        <div class="payment-wrapper scroll-trigger animate--slide-in">
             {% if block.settings.heading %}
                 <span class="versand">{{ block.settings.heading }}</span>
             {% endif %}
@@ -705,6 +705,18 @@
             {% endif %}
             </div>
         </div>
+        {% when 'contact' %}
+         <div class="contact-details scroll-trigger animate--slide-in">
+          <img
+          src="{{ block.settings.image | image_url: width: 72 }}"
+          width="24"
+          height="24"
+          loading="lazy"
+        >
+        <div class="contact_details">
+          {{ block.settings.richtext }}
+        </div>
+         </div> 
       {% endcase %}
   {% endfor %}
     {% render 'product-media-modal', variant_images: variant_images %}
@@ -1083,6 +1095,25 @@
           "label": "t:sections.main-product.blocks.payment.settings.payment.label"
         }
       ]
+    },
+    {
+        "type": "contact",
+        "name": "t:sections.main-product.blocks.contact.name",
+        "settings": 
+          [
+            {
+            "type": "image_picker",
+            "id": "image",
+            "info": "t:sections.main-product.blocks.contact.settings.contact.info",
+            "label": "t:sections.main-product.blocks.contact.settings.contact.label"
+            },
+            {
+            "type": "richtext",
+            "id": "richtext",
+            "info": "t:sections.main-product.blocks.contact.settings.richtext.info",
+            "label": "t:sections.main-product.blocks.contact.settings.richtext.label"
+            }
+          ]
     },
     {
       "type": "popup",
