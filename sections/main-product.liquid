@@ -653,8 +653,60 @@
           </a>
         </section>
       </div>
+     
     </div>
-
+    {% for block in section.blocks %}
+      {%- case block.type -%}
+        {% when 'payment' %}
+        <div class="payment-wrapper">
+            {% if block.settings.heading %}
+                <span class="versand">{{ block.settings.heading }}</span>
+            {% endif %}
+            <div class="logo-wrappers">
+            {% if block.settings.payment_1 %}
+              <img
+              src="{{ block.settings.payment_1 | image_url: width: 58 }}"
+              width="58"
+              height="38.67"
+              loading="lazy"
+            >
+            {% endif %}
+            {% if block.settings.payment_2 %}
+              <img
+              src="{{ block.settings.payment_2 | image_url: width: 58 }}"
+              width="58"
+              height="38.67"
+              loading="lazy"
+            >
+            {% endif %}
+            {% if block.settings.payment_3 %}
+              <img
+              src="{{ block.settings.payment_3 | image_url: width: 58 }}"
+              width="58"
+              height="38.67"
+              loading="lazy"
+            >
+            {% endif %}
+            {% if block.settings.payment_4 %}
+              <img
+              src="{{ block.settings.payment_4 | image_url: width: 58 }}"
+              width="58"
+              height="38.67"
+              loading="lazy"
+            >
+            {% endif %}
+            {% if block.settings.payment_5 %}
+              <img
+              src="{{ block.settings.payment_5 | image_url: width: 58 }}"
+              width="58"
+              height="38.67"
+              loading="lazy"
+            >
+            {% endif %}
+            </div>
+        </div>
+      {% endcase %}
+  {% endfor %}
     {% render 'product-media-modal', variant_images: variant_images %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
@@ -993,6 +1045,42 @@
           "default": "t:sections.main-product.blocks.payment.settings.heading.default",
           "info": "t:sections.main-product.blocks.payment.settings.heading.info",
           "label": "t:sections.main-product.blocks.payment.settings.heading.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_1",
+          "info": "t:sections.main-product.blocks.payment.settings.payment.info",
+          "label": "t:sections.main-product.blocks.payment.settings.payment.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_2",
+          "info": "t:sections.main-product.blocks.payment.settings.payment.info",
+          "label": "t:sections.main-product.blocks.payment.settings.payment.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_3",
+          "info": "t:sections.main-product.blocks.payment.settings.payment.info",
+          "label": "t:sections.main-product.blocks.payment.settings.payment.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_4",
+          "info": "t:sections.main-product.blocks.payment.settings.payment.info",
+          "label": "t:sections.main-product.blocks.payment.settings.payment.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_5",
+          "info": "t:sections.main-product.blocks.payment.settings.payment.info",
+          "label": "t:sections.main-product.blocks.payment.settings.payment.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_6",
+          "info": "t:sections.main-product.blocks.payment.settings.payment.info",
+          "label": "t:sections.main-product.blocks.payment.settings.payment.label"
         }
       ]
     },

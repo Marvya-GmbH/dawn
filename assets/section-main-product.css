@@ -12,6 +12,7 @@ product-info {
 .product--thumbnail_slider{
   gap: 48px;
   display: flex;
+  justify-content: space-between;
 }
 .product--no-media {
   max-width: 57rem;
@@ -30,7 +31,25 @@ product-info {
   border: 2px solid #F4F1EF;
   
 }
-
+.payment-wrapper{
+  max-width: 640px;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 48px 17px 48px;
+  margin-top: 12px;
+  border: 2px solid #F4F1EF;
+}
+.payment-wrapper .versand{
+  margin-bottom: 0;
+}
+.logo-wrappers{
+  display: flex;
+  align-items: center;
+  gap: 33.6px;
+  justify-content: space-between;
+  margin-top: 12px;
+}
 @media screen and (min-width: 750px) {
   .product__column-sticky {
     position: sticky;

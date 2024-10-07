@@ -2260,6 +2260,10 @@
               "label": "Heading",
               "info": "All available options should be emphasized here",
               "default": "Heading for payment options"
+            },
+            "payment":{
+              "label": "Payment icon",
+              "info": "Include an icon of available payment option"
             }
           }
         },
