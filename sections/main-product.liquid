@@ -218,19 +218,15 @@
 
                 <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
-                    <summary class="collapsible-summary">
+                    <summary class="collapsible-summary" data-id="{{ block.id }}">
                       <div class="summary__title">
-                        <img width="24px" height="24px" src="{{block.settings.icon | img_url:'original'}}">
+                        <img width="16px" height="16px" src="{{block.settings.icon | img_url:'original'}}">
                         <h2 class="h4 accordion__title inline-richtext">
                           {{ block.settings.heading | default: block.settings.page.title | escape }}
                         </h2>
-                      </div>
+                      </div>  
                       {{- 'icon-arrow-right.svg' | inline_asset_content -}}
                     </summary>
-                    <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
-                      {{ block.settings.content }}
-                      {{ block.settings.page.content }}
-                    </div>
                   </details>
                 </div>
               {%- when 'popup' -%}
@@ -713,19 +709,14 @@
   </div>
 </product-info>
 
+
 {% for block in section.blocks %}
   {%- case block.type -%}
     {%- when 'collapsible_tab' -%}
       {% if block.settings.page != blank %}
         {% assign selected_page_handle = block.settings.page %}
         {% assign selected_page = pages[selected_page_handle] %}
-        <div id="{{ selected_page.title | downcase }}" class="drawer">
-          <div class="drawer-content">
-            <span class="close">&times;</span>
-            <h2>{{ selected_page.title }}</h2>
-            {{ selected_page.content }}
-          </div>
-        </div>
+        {% render 'content-drawer', selected_page_handle: selected_page_handle, selected_page: selected_page, block_id: block.id %}
       {% endif %}
   {%- endcase -%}
 {% endfor %}
@@ -986,14 +977,22 @@
           "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.label"
         },
         {
-          "type": "richtext",
-          "id": "content",
-          "label": "t:sections.main-product.blocks.collapsible_tab.settings.content.label"
-        },
-        {
           "type": "page",
           "id": "page",
           "label": "t:sections.main-product.blocks.collapsible_tab.settings.page.label"
+        }
+      ]
+    },
+    {
+      "type": "payment",
+      "name": "t:sections.main-product.blocks.payment.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "t:sections.main-product.blocks.payment.settings.heading.default",
+          "info": "t:sections.main-product.blocks.payment.settings.heading.info",
+          "label": "t:sections.main-product.blocks.payment.settings.heading.label"
         }
       ]
     },
@@ -1048,6 +1047,7 @@
         },
         {
           "type": "select",
+
           "id": "icon",
           "options": [
             {

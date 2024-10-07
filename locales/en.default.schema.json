@@ -2112,9 +2112,7 @@
               "label": "Heading",
               "default": "Collapsible row"
             },
-            "content": {
-              "label": "Row content"
-            },
+
             "page": {
               "label": "Row content from page"
             },
@@ -2252,6 +2250,16 @@
               "options__44": {
                 "label": "Washing"
               }
+            }
+          }
+        },
+        "payment":{
+          "name": "Payment options",
+          "settings":{
+            "heading": {
+              "label": "Heading",
+              "info": "All available options should be emphasized here",
+              "default": "Heading for payment options"
             }
           }
         },
@@ -3272,9 +3280,6 @@
               "default": "Collapsible row",
               "info": "Include a heading that explains the content.",
               "label": "Heading"
-            },
-            "row_content": {
-              "label": "Row content"
             },
             "page": {
               "label": "Row content from page"

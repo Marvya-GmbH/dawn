@@ -93,7 +93,6 @@
                     role="region"
                     aria-labelledby="Summary-{{ block.id }}-{{ section.id }}"
                   >
-                    {{ block.settings.row_content }}
                     {{ block.settings.page.content }}
                   </div>
                 </details>
@@ -479,11 +478,6 @@
           ],
           "default": "check_mark",
           "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.label"
-        },
-        {
-          "type": "richtext",
-          "id": "row_content",
-          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
         },
         {
           "type": "page",

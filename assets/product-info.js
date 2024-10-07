@@ -18,7 +18,6 @@ if (!customElements.get('product-info')) {
 
       connectedCallback() {
         this.initializeProductSwapUtility();
-
         this.onVariantChangeUnsubscriber = subscribe(
           PUB_SUB_EVENTS.optionValueSelectionChange,
           this.handleOptionValueChange.bind(this)
@@ -26,6 +25,17 @@ if (!customElements.get('product-info')) {
         this.updateActiveVariant();
         this.initQuantityHandlers();
         this.dispatchEvent(new CustomEvent('product-info:loaded', { bubbles: true }));
+        this.querySelectorAll('.collapsible-summary').forEach((item) => {
+          item.addEventListener('click', (event) => {
+            event.preventDefault();
+            this.triggerDrawer(event); 
+          });
+        });
+        document.querySelectorAll('.close-drawer').forEach((button) => {
+          button.addEventListener('click', (event) => {
+            this.closeDrawer(event); 
+          });
+        });
       }
 
       // Function to update the .active_variant element with the selected input's value
@@ -389,7 +399,31 @@ if (!customElements.get('product-info')) {
           }
         }
       }
-
+      triggerDrawer(event) {
+        const targetElement = event.target.closest('.collapsible-summary[data-id]');
+        if (!targetElement) return;
+        const dataId = targetElement.getAttribute('data-id');
+        const drawerElement = document.querySelector(`.drawer[data-id="${dataId}"]`);
+        if (drawerElement) {
+          drawerElement.classList.add('open');
+        }
+      }
+      closeDrawer(event) {
+        event.preventDefault();
+        const closeButton = event.target.closest('.close-drawer');
+        if (closeButton) {
+          const drawer = closeButton.closest('.drawer');
+          if (drawer) {
+            drawer.classList.remove('open');
+          }
+          return;
+        }
+        const drawer = event.target.closest('.drawer');
+        const drawerContent = event.target.closest('.drawer-content');
+        if (drawer && !drawerContent) {
+          drawer.classList.remove('open');
+        }
+      }
       get productForm() {
         return this.querySelector(`product-form`);
       }

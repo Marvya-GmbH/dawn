@@ -1,0 +1,10 @@
+{% assign selected_page = selected_page %}
+{% assign selected_page_handle = selected_page_handle %}
+{% assign block_id = block_id %}
+<div id="{{ selected_page.title | downcase }}" class="drawer" data-id="{{block_id}}">
+    <div class="drawer-content">
+    <a href="#" class="close-drawer">{{- 'icon-close.svg' | inline_asset_content -}}</a>
+    <h2>{{ selected_page.title }}</h2>
+      {{ selected_page.content }}
+    </div>
+  </div>
