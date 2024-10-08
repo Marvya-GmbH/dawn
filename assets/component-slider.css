@@ -347,6 +347,11 @@ slider-component.slider-component-full-width {
   justify-content: center;
   border-radius: 24px;
 }
+@media (max-width: 749px){
+  .slider-button{
+    display: none;
+  }
+}
 .slider-button--prev{
   position: absolute;
   left: -30px;

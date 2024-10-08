@@ -91,12 +91,14 @@
               {%- when '@app' -%}
                 {% render block %}
               {%- when 'text' -%}
+                <div class="wrap-metafield-text">
                 <p
                   class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
                   {{ block.shopify_attributes }}
                 >
                   {{- block.settings.text -}}
                 </p>
+                </div>
               {%- when 'angebot' -%}
                 <span class="angebot">Angebot</span>
               {%- when 'review-stars' -%}
@@ -699,6 +701,14 @@
             {% if block.settings.payment_5 %}
               <img
               src="{{ block.settings.payment_5 | image_url: width: 58 }}"
+              width="58"
+              height="38.67"
+              loading="lazy"
+            >
+            {% endif %}
+            {% if block.settings.payment_6 %}
+              <img
+              src="{{ block.settings.payment_6 | image_url: width: 58 }}"
               width="58"
               height="38.67"
               loading="lazy"

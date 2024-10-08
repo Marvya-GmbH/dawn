@@ -18,7 +18,11 @@
   transition: opacity 1s ease;
   visibility: hidden;
 }
-
+  @media(max-width: 990px){
+    .sticky-atc-bar {
+        display: none !important;
+    }
+  }
   .sticky-atc-bar .container {
     display: flex;
     justify-content: space-between;

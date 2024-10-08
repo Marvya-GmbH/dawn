@@ -141,8 +141,28 @@
         </span>
       {% endif %}
         {% if price_with_vat_display != '0,0' %}
-        <span class="mwst">{{ price_with_vat_display }} € {% if is_card %}Inkl. MwSt.{% else %}inkl. MwSt., zzgl. Versand{%endif%}</span>
-        {% endif %}
+          {% if price_with_vat_display contains ',' %}
+            {% assign decimal_part = price_with_vat_display | split: ',' | last %}
+            {% assign integer_part = price_with_vat_display | split: ',' | first %}
+            
+            {% if decimal_part.size == 1 %}
+              {% assign price_with_vat_display = integer_part | append: ',' | append: decimal_part | append: '0' %}
+            {% else %}
+              {% assign price_with_vat_display = integer_part | append: ',' | append: decimal_part %}
+            {% endif %}
+            
+            <span class="mwst">{{ price_with_vat_display }} € {% if is_card %}Inkl. MwSt.{% else %}inkl. MwSt., zzgl. Versand{%endif%}</span>
+          {% else %}
+            {% assign price_with_vat_display = price_with_vat_display | append: ',00' %}
+            <span class="mwst">{{ price_with_vat_display }} € {% if is_card %}Inkl. MwSt.{% else %}inkl. MwSt., zzgl. Versand{%endif%}</span>
+          {% endif %}
+          
+
+        {% assign price_with_vat_display = price_with_vat_display | replace: ".", "," %}  <!-- Assuming prices are formatted with commas -->
+        {%endif%}
+        
+
+
 
       <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
         <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
