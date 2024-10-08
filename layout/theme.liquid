@@ -372,5 +372,35 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+  const slider = document.querySelector('#Slider-Thumbnails-template--18279146946782__main');
+  const prevButton = document.querySelector('button[name="previous-vertical"]');
+  const nextButton = document.querySelector('button[name="next-vertical"]');
+  const listItems = slider.querySelectorAll('li.thumbnail-list__item');
+  let currentIndex = 0;
+
+  function updateSlider() {
+    listItems[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  prevButton.addEventListener('click', function () {
+    if (currentIndex > 0) {
+      currentIndex--;
+      listItems[currentIndex].querySelector('button').click(); // Simulate click on the button inside <li>
+      updateSlider();
+    }
+  });
+
+  nextButton.addEventListener('click', function () {
+    if (currentIndex < listItems.length - 1) {
+      currentIndex++;
+      listItems[currentIndex].querySelector('button').click(); // Simulate click on the button inside <li>
+      updateSlider();
+    }
+  });
+});
+
+    </script>
   </body>
 </html>

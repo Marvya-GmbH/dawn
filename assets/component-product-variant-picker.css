@@ -165,6 +165,9 @@ border-color: #C0BEBE;
   line-height: 30px;
   padding: 3px 7px;
 }
+.product-form__input--pill{
+  height: 64.6px;
+}
 @media screen and (min-width: 750px) {
   .product-form__input--swatch .swatch-input__input + .swatch-input__label {
     --swatch-input--size: 2.8rem;

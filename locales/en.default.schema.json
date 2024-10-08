@@ -2405,6 +2405,9 @@
         "enable_sticky_info": {
           "label": "Enable sticky content on desktop"
         },
+        "enable_sticky_atc": {
+          "label": "Enable sticky Add to Cart"
+        },
         "gallery_layout": {
           "label": "Desktop layout",
           "options__1": {
