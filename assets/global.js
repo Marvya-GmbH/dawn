@@ -68,21 +68,6 @@ class HTMLUpdateUtility {
   }
 }
 
-document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
-  summary.setAttribute('role', 'button');
-  summary.setAttribute('aria-expanded', summary.parentNode.hasAttribute('open'));
-
-  if (summary.nextElementSibling.getAttribute('id')) {
-    summary.setAttribute('aria-controls', summary.nextElementSibling.id);
-  }
-
-  summary.addEventListener('click', (event) => {
-    event.currentTarget.setAttribute('aria-expanded', !event.currentTarget.closest('details').hasAttribute('open'));
-  });
-
-  if (summary.closest('header-drawer, menu-drawer')) return;
-  summary.parentElement.addEventListener('keyup', onKeyUpEscape);
-});
 
 const trapFocusHandlers = {};
 
@@ -727,7 +712,7 @@ class SliderComponent extends HTMLElement {
     this.pageTotalElement = this.querySelector('.slider-counter--total');
     this.prevButton = this.querySelector('button[name="previous"]');
     this.nextButton = this.querySelector('button[name="next"]');
-
+    
     if (!this.slider || !this.nextButton) return;
 
     this.initPages();
@@ -778,9 +763,7 @@ class SliderComponent extends HTMLElement {
         })
       );
     }
-
     if (this.enableSliderLooping) return;
-
     if (this.isSlideVisible(this.sliderItemsToShow[0]) && this.slider.scrollLeft === 0) {
       this.prevButton.setAttribute('disabled', 'disabled');
     } else {
@@ -1061,7 +1044,6 @@ class VariantSelects extends HTMLElement {
     this.addEventListener('change', (event) => {
       const target = this.getInputForEventTarget(event.target);
       this.updateSelectionMetadata(event);
-
       publish(PUB_SUB_EVENTS.optionValueSelectionChange, {
         data: {
           event,
@@ -1100,7 +1082,7 @@ class VariantSelects extends HTMLElement {
       );
     } else if (tagName === 'INPUT' && target.type === 'radio') {
       const selectedSwatchValue = target.closest(`.product-form__input`).querySelector('[data-selected-value]');
-      if (selectedSwatchValue) selectedSwatchValue.innerHTML = value;
+      if (selectedSwatchValue) selectedSwatchValue.innerHTML = value;    
     }
   }
 

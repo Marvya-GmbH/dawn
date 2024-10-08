@@ -11,9 +11,29 @@
 }
 
 .card:not(.ratio) {
-  display: flex;
-  flex-direction: column;
   height: 100%;
+}
+.card--standard{
+  display: flex;
+  flex-direction: row;
+}
+.card__inner{
+  min-width: 100px;
+}
+.card__badge{
+  display: none;
+}
+.card__media .media{
+  min-width: 100px;
+}
+.card__media .media img{
+  height: auto;
+}
+.card__media img{
+  max-width: 100px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
 }
 
 .card.card--horizontal {
@@ -137,8 +157,26 @@
 .card__information {
   grid-row-start: 2;
   padding: 1.3rem 1rem;
+  max-width: 196px;
 }
-
+.card__information .rating-wrapper{
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+}
+.card__information .rating{
+  display: flex;
+  align-items: end;
+}
+.card__information .review-count{
+  font-size: 12px;
+}
+.card__information .price-item{
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 30px;
+}
+.card__information 
 .card:not(.ratio) > .card__content {
   grid-template-rows: max-content minmax(0, 1fr) max-content auto;
 }
@@ -190,6 +228,47 @@
   text-align: left;
 }
 
+.quick-add__submit{
+  background: #FF6633;
+}
+.quick-add__submit::after{
+  display: none;
+}
+.wrap-quick-atc{
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+}
+.wrap-quick-atc button{
+  width: auto;
+}
+.wrap-quick-atc .icon-cart{
+  margin-left: unset;
+}
+.heart-wrapper{
+  max-width: 48px;
+  width: 100%;
+  max-height: 48px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: .75rem;
+}
+.heart-wrapper .icon-heart{
+  width: 14px;
+  height: 13px;
+}
+.lieferbar{
+  color: #0A1119;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.card__heading .full-unstyled-link::after{
+  display: none !important;
+}
 @media screen and (min-width: 990px) {
   .grid--6-col-desktop .card__content quick-add-bulk .quantity {
     width: auto;
@@ -290,7 +369,6 @@
 }
 
 .card__media .media img {
-  height: 100%;
   object-fit: cover;
   object-position: center center;
   width: 100%;
@@ -303,12 +381,24 @@
 .card__heading {
   margin-top: 0;
   margin-bottom: 0;
+  font-size: 14px;
+  color: #0A1119;
 }
-
+.card-information .price-item--sale{
+  display: none;
+}
+.card-information .productdatenblatt{
+  display: none;
+}
 .card__heading:last-child {
   margin-bottom: 0;
 }
-
+.card__content .vendor{
+  color: #133A61;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 600;
+}
 .card--horizontal .card__heading,
 .card--horizontal .price__container .price-item,
 .card--horizontal__quick-add {

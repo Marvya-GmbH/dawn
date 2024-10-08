@@ -13,20 +13,43 @@ if (!customElements.get('product-info')) {
 
       constructor() {
         super();
-
         this.quantityInput = this.querySelector('.quantity__input');
       }
 
       connectedCallback() {
         this.initializeProductSwapUtility();
-
         this.onVariantChangeUnsubscriber = subscribe(
           PUB_SUB_EVENTS.optionValueSelectionChange,
           this.handleOptionValueChange.bind(this)
         );
-
+        this.updateActiveVariant();
         this.initQuantityHandlers();
         this.dispatchEvent(new CustomEvent('product-info:loaded', { bubbles: true }));
+        this.querySelectorAll('.collapsible-summary').forEach((item) => {
+          item.addEventListener('click', (event) => {
+            event.preventDefault();
+            this.triggerDrawer(event); 
+          });
+        });
+        document.querySelectorAll('.close-drawer').forEach((button) => {
+          button.addEventListener('click', (event) => {
+            this.closeDrawer(event); 
+          });
+        });
+      }
+
+      // Function to update the .active_variant element with the selected input's value
+      updateActiveVariant() {
+        const fieldset = document.querySelector('.product-form__input--pill');
+        const radios = fieldset.querySelectorAll('input[type="radio"]');
+        radios.forEach((radio) => {
+          if (radio.checked) {
+            const activeVariantElement = document.querySelector('.active_variant');
+            if (activeVariantElement) {
+              activeVariantElement.textContent = radio.value;
+            }
+          }
+        });
       }
 
       addPreProcessCallback(callback) {
@@ -200,6 +223,7 @@ if (!customElements.get('product-info')) {
             html.getElementById(`ProductSubmitButton-${this.sectionId}`)?.hasAttribute('disabled') ?? true,
             window.variantStrings.soldOut
           );
+          this.updateActiveVariant();
 
           publish(PUB_SUB_EVENTS.variantChange, {
             data: {
@@ -339,7 +363,7 @@ if (!customElements.get('product-info')) {
         const currentVariantId = this.productForm?.variantIdInput?.value;
         if (!currentVariantId) return;
 
-        this.querySelector('.quantity__rules-cart .loading__spinner').classList.remove('hidden');
+        //this.querySelector('.quantity__rules-cart .loading__spinner').classList.remove('hidden');
         fetch(`${this.dataset.url}?variant=${currentVariantId}&section_id=${this.dataset.section}`)
           .then((response) => response.text())
           .then((responseText) => {
@@ -375,7 +399,31 @@ if (!customElements.get('product-info')) {
           }
         }
       }
-
+      triggerDrawer(event) {
+        const targetElement = event.target.closest('.collapsible-summary[data-id]');
+        if (!targetElement) return;
+        const dataId = targetElement.getAttribute('data-id');
+        const drawerElement = document.querySelector(`.drawer[data-id="${dataId}"]`);
+        if (drawerElement) {
+          drawerElement.classList.add('open');
+        }
+      }
+      closeDrawer(event) {
+        event.preventDefault();
+        const closeButton = event.target.closest('.close-drawer');
+        if (closeButton) {
+          const drawer = closeButton.closest('.drawer');
+          if (drawer) {
+            drawer.classList.remove('open');
+          }
+          return;
+        }
+        const drawer = event.target.closest('.drawer');
+        const drawerContent = event.target.closest('.drawer-content');
+        if (drawer && !drawerContent) {
+          drawer.classList.remove('open');
+        }
+      }
       get productForm() {
         return this.querySelector(`product-form`);
       }

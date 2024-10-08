@@ -7,7 +7,105 @@
   --focused-base-outline-offset: 0.3rem;
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
 }
-
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 100;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Thin.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Thin.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Thin.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Thin.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Thin.ttf') format("truetype");
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 200;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-ExtraLight.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-ExtraLight.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-ExtraLight.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-ExtraLight.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-ExtraLight.ttf') format("truetype");
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 300;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Light.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Light.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Light.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Light.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Light.ttf') format("truetype");
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Regular.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Regular.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Regular.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Regular.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Regular.ttf') format("truetype");
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Medium.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Medium.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Medium.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Medium.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Medium.ttf') format("truetype");
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-SemiBold.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-SemiBold.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-SemiBold.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-SemiBold.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-SemiBold.ttf') format("truetype");
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Bold.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Bold.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Bold.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Bold.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Bold.ttf') format("truetype");
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 800;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-ExtraBold.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-ExtraBold.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-ExtraBold.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-ExtraBold.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-ExtraBold.ttf') format("truetype");
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 900;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Black.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Black.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Black.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Black.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/Poppins/Poppins-Black.ttf') format("truetype");
+  font-display: swap;
+} 
 .product-card-wrapper .card,
 .contains-card--product {
   --border-radius: var(--product-card-corner-radius);
@@ -1118,12 +1216,9 @@ summary::-webkit-details-marker {
 .media > *:not(.zoom):not(.deferred-media__poster-button),
 .media model-viewer {
   display: block;
-  max-width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
 }
 
 .media > img {
@@ -2512,7 +2607,11 @@ input[type='checkbox'] {
   justify-self: end;
   padding-right: 0.8rem;
 }
-
+@media(max-width: 749px){
+  .header__icons{
+    margin-right: 5px;
+  }
+}
 .header__icons .shopify-app-block {
   max-width: 4.4rem;
   max-height: 4.4rem;
@@ -2565,17 +2664,6 @@ input[type='checkbox'] {
 .header__icon--cart {
   position: relative;
   margin-right: -1.2rem;
-}
-
-.header__icon--menu[aria-expanded='true']::before {
-  content: '';
-  top: 100%;
-  left: 0;
-  height: calc(var(--viewport-height, 100vh) - (var(--header-bottom-position, 100%)));
-  width: 100%;
-  display: block;
-  position: absolute;
-  background: rgba(var(--color-foreground), 0.5);
 }
 
 .header__icon--account shop-user-avatar {
@@ -3114,7 +3202,7 @@ details-disclosure > details {
   .shopify-payment-button [role='button']:focus {
     outline: solid transparent 1px;
   }
-
+  
   .field__input:focus,
   .select__select:focus,
   .customer .field input:focus,
@@ -3597,4 +3685,16 @@ details-disclosure > details {
   100% {
     transform: translateX(100%) scaleX(0);
   }
+}
+#MainContent *{
+  font-family: 'Poppins';
+}
+.menu-drawer-container .close-x{
+  display: none;
+}
+.menu-drawer-container.menu-opening .close-x{
+  display: block;
+}
+.menu-icon-group{
+  margin-left: 20px;
 }

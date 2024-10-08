@@ -46,13 +46,15 @@
   id="MediaGallery-{{ section.id }}"
   role="region"
   {% if section.settings.enable_sticky_info %}
-    class="product__column-sticky"
+    class="product__column-sticky main_gallery_pdp"
+  {% else %}
+    class="main_gallery_pdp"
   {% endif %}
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
-  <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
+  <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter main_gallery_slider">
     <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
       {{ 'accessibility.skip_to_product_info' | t }}
     </a>
@@ -188,10 +190,10 @@
       <button
         type="button"
         class="slider-button slider-button--prev{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}"
-        name="previous"
+        name="previous-vertical"
         aria-label="{{ 'general.slider.previous_slide' | t }}"
         aria-controls="GalleryThumbnails-{{ section.id }}"
-        data-step="3"
+        data-step="1"
       >
         <span class="svg-wrapper">
           {{- 'icon-caret.svg' | inline_asset_content -}}
@@ -318,10 +320,10 @@
       <button
         type="button"
         class="slider-button slider-button--next{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}"
-        name="next"
+        name="next-vertical"
         aria-label="{{ 'general.slider.next_slide' | t }}"
         aria-controls="GalleryThumbnails-{{ section.id }}"
-        data-step="3"
+        data-step="1"
       >
         <span class="svg-wrapper">
           {{- 'icon-caret.svg' | inline_asset_content -}}

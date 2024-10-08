@@ -2052,6 +2052,10 @@
         "buy_buttons": {
           "name": "Buy buttons",
           "settings": {
+            "quantity_enabled": {
+              "label": "Show quantity input",
+              "info": "Enabling quantity input in your product page allows customer to select more than one product for a purchase."
+            },
             "show_dynamic_checkout": {
               "label": "Show dynamic checkout buttons",
               "info": "Using the payment methods available on your store, customers see their preferred option, like PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)"
@@ -2108,9 +2112,7 @@
               "label": "Heading",
               "default": "Collapsible row"
             },
-            "content": {
-              "label": "Row content"
-            },
+
             "page": {
               "label": "Row content from page"
             },
@@ -2251,6 +2253,33 @@
             }
           }
         },
+        "payment":{
+          "name": "Payment options",
+          "settings":{
+            "heading": {
+              "label": "Heading",
+              "info": "All available options should be emphasized here",
+              "default": "Heading for payment options"
+            },
+            "payment":{
+              "label": "Payment icon",
+              "info": "Include an icon of available payment option"
+            }
+          }
+        },
+        "contact":{
+          "name": "Contact",
+          "settings":{
+            "contact":{
+              "label": "Image",
+              "info": "Contact person's photo"
+            },
+            "richtext":{
+              "label": "Contact info",
+              "info": "Add contact information ie. phone number"
+            }
+          }
+        },
         "popup": {
           "name": "Pop-up",
           "settings": {
@@ -2375,6 +2404,9 @@
         },
         "enable_sticky_info": {
           "label": "Enable sticky content on desktop"
+        },
+        "enable_sticky_atc": {
+          "label": "Enable sticky Add to Cart"
         },
         "gallery_layout": {
           "label": "Desktop layout",
@@ -3268,9 +3300,6 @@
               "default": "Collapsible row",
               "info": "Include a heading that explains the content.",
               "label": "Heading"
-            },
-            "row_content": {
-              "label": "Row content"
             },
             "page": {
               "label": "Row content from page"
