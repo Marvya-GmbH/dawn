@@ -66,15 +66,19 @@
               <span class="visually-hidden visually-hidden--inline">
                 {{- 'products.product.price.regular_price' | t -}}
               </span>
+                x
               <span>
-                <s class="price-item price-item--regular variant-item__old-price">
                   {% if settings.currency_code_enabled %}
+                    <s class="price-item price-item--regular variant-item__old-price">
                     {{ compare_at_price | money_with_currency }}
+                    </s>
                   {% else %}
+                  <s class="price-item price-item--regular variant-item__old-price">
                     {{ compare_at_price | money }}
+                  </s>
                   {% endif %}
-                </s>
               </span>
+
             {%- endunless -%}
           {%- endif -%}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
@@ -86,22 +90,29 @@
           </span>
         {%- else -%}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+          {% if money_price != '' %}
           <span class="price-item price-item--regular">
             {{ money_price | replace: '.', ',' | replace: '€', '' | replace: 'EUR', '' | replace: ' ', '' }}€
           </span>
+          {% endif %}
         {%- endif -%}
       </div>
       <div class="price__sale price-wrapper">
         {%- unless product.price_varies == false and product.compare_at_price_varies %}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span>
-            <s class="price-item price-item--regular">
-              {% if settings.currency_code_enabled %}
+           
+              {% if settings.currency_code_enabled and compare_at_price != blank %}
+                <s class="price-item price-item--regular">
                 {{ compare_at_price | money_without_currency }}€
-              {% else %}
+                </s>
+              {% elsif compare_at_price != blank %}
+              <s class="price-item price-item--regular">
                 {{ compare_at_price | money }}
+                </s>
+
               {% endif %}
-            </s>
+            
           </span>
         {%- endunless -%}
 
@@ -110,7 +121,8 @@
         {%- assign compare_at_price_int = compare_at_price | times: 1 -%}
         {%- assign money_price_int = money_price | remove: '€' | remove: 'EUR' | remove: ',' | strip | times: 1 -%}
         {%- assign price_with_vat = money_price_int | times: 1.19 -%}
-        {%- assign price_with_vat_display = price_with_vat | divided_by: 100 | replace: '.', ',' -%}
+        {%- assign price_with_vat_rounded = price_with_vat | divided_by: 100.00 | round: 2 -%}
+        {%- assign price_with_vat_display = price_with_vat_rounded | replace: '.', ',' -%}
         {%- assign compare_at = compare_at_price | money_without_currency -%}
         {%- assign price_diff = compare_at_price_int | minus: money_price_int -%}
         {%- assign savings_percentage = compare_at
@@ -119,15 +131,15 @@
           | divided_by: compare_at
           | round
         -%}
-        <span class="price-item price-item--sale price-item--last">
-          {{ money_price | replace: '.', ',' | replace: '€', '' | replace: 'EUR', '' | replace: ' ', '' }}€
-          {% if compare_at_price_int > money_price_int %}
+        {% if compare_at_price_int > money_price_int %}
+        <span class="price-item price-item--sale price-item--last">  
+            {{ money_price | replace: '.', ',' | replace: '€', '' | replace: 'EUR', '' | replace: ' ', '' }}€
             <span class="savings"> -{{ savings_percentage }}% </span>
-          {% endif %}
         </span>
-
-        <span class="mwst"> {{ price_with_vat_display }}€ inkl. MwSt., zzgl. Versand</span>
-      </div>
+      {% endif %}
+        {% if price_with_vat_display != '0,0' %}
+        <span class="mwst">{{ price_with_vat_display }} € {% if is_card %}Inkl. MwSt.{% else %}inkl. MwSt., zzgl. Versand{%endif%}</span>
+        {% endif %}
 
       <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
         <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
