@@ -71,6 +71,10 @@ product-info {
   justify-content: space-between;
   margin-top: 12px;
 }
+.related-products{
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 .related-products__heading{
   font-weight: 600;
   font-size: 24px;
@@ -83,7 +87,55 @@ product-info {
 .related_products_slider{
   margin-right: 30px;
 }
-
+.accordion-split{
+  display: flex;
+}
+.product-accordion{
+  margin-top: 7.5rem;
+}
+.product-accordion .accordion-text{
+  font-size: 16px;
+  line-height: 30px;
+  color: #0A1119;
+  font-weight: 300;
+}
+.accordion-split .accordion-text{
+  flex: 2;
+}
+.accordion-split .accordion-image{
+  flex: 1;
+  max-width: 332px;
+  margin-left: 6rem;
+}
+.accordion-split .accordion-image img{
+  width: 100%;
+}
+.accordion-split .accordion-text{
+  padding: 0px 24px 48px 24px;
+}
+.collapsible-title svg{
+  width: 16px;
+  position: absolute;
+  right: 12px;
+  top: 40%;
+  transform: rotate(180deg);
+}
+details[open] svg {
+  transform: rotate(0deg);
+  animation: 0.5s ease all;
+}
+.accordion:first-child{
+  border-top: 1px solid rgba(192, 190, 190, .2);
+}
+.collapsible-title h2{
+  margin: 0;
+}
+.accordion summary{
+  padding: 1.5rem 0;
+}
+.card__information{
+  padding-bottom: 0 !important;
+}
 @media screen and (min-width: 750px) {
   .product__column-sticky {
     position: sticky;

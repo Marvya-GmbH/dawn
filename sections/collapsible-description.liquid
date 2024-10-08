@@ -1,14 +1,18 @@
-<section class="product-accordion">
+<section class="product-accordion page-width">
   <div class="accordion">
     {% assign title1 = product.description | split: '<h2>' | last | split: '</h2>' | first %}
     {% assign description_parts = product.description | split: '<h2>' %}
     {% for block in description_parts %}
       {% if block contains '</h2>' %}
         {% assign heading_and_content = block | split: '</h2>' %}
-        <h2>{{ heading_and_content[0] | strip_html }}</h2>
+        <div class="accordion">
+        <details id="Details-collapsible_row-{{ forloop.index }}">
+        <summary id="Summary-collapsible_row_{{forloop.index}}" class="collapsible-title"><h2>{{ heading_and_content[0] | strip_html }}</h2>
+        {{- 'icon-angle-up.svg' | inline_asset_content -}}
+        </summary>
         {% if heading_and_content[1] contains '<img' %}
           {% assign content_parts = heading_and_content[1] | split: '<img' %}
-          <div class="accordion-content">
+          <div class="accordion-content rte accordion-split">
             <div class="accordion-text">
               {{ content_parts[0] | strip_html }}
             </div>
@@ -17,10 +21,12 @@
             </div>
           </div>
         {% else %}
-          <div class="accordion-content">
+          <div class="accordion-content rte">
             {{ heading_and_content[1] | strip_html }}
           </div>
         {% endif %}
+        </details>
+      </div>
       {% endif %}
     {% endfor %}
   </div>
